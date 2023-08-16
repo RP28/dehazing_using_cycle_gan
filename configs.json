@@ -1,0 +1,27 @@
+{
+    "training_params": {
+        "g_lr": 0.0006,
+        "d_x_lr": 0.0002,
+        "d_y_lr": 0.0001,
+        "beta1": 0.5,
+        "beta2": 0.999,
+        "num_epochs": 100,
+        "batch_size": 8
+    },
+    "model_properties": {
+        "act_func": "relu"
+    },
+    "path": {
+        "root_gen_XY_path": "models/generator_XY",
+        "root_dis_X_path": "models/discriminator_X",
+        "root_gen_YX_path": "models/generator_YX",
+        "root_dis_Y_path": "models/discriminator_Y",
+        "dataset_path": "dataset",
+        "logger_file": "logs",
+        "model_outputs": "outputs"
+    },
+    "img_specifications": {
+        "height": 60,
+        "width": 80
+    }
+}
