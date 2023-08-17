@@ -35,6 +35,27 @@ def _get_act_func():
             )
 
 
+def dwt_init(x):
+    f_LL = torch.tensor([[1, 1], [1, 1]], dtype=torch.float).unsqueeze(0).unsqueeze(0)
+    f_LH = torch.tensor([[-1, -1], [1, 1]], dtype=torch.float).unsqueeze(0).unsqueeze(0)
+    f_HL = torch.tensor([[-1, 1], [-1, 1]], dtype=torch.float).unsqueeze(0).unsqueeze(0)
+    f_HH = torch.tensor([[1, -1], [-1, 1]], dtype=torch.float).unsqueeze(0).unsqueeze(0)
+    x_LL = F.conv2d(x, f_LL, stride=2) / 2
+    x_LH = F.conv2d(x, f_LH, stride=2) / 2
+    x_HL = F.conv2d(x, f_HL, stride=2) / 2
+    x_HH = F.conv2d(x, f_HH, stride=2) / 2
+    return x_LL, torch.cat((x_HL, x_LH, x_HH), 1)
+
+
+class DWT(nn.Module):
+    def __init__(self):
+        super(DWT, self).__init__()
+        self.requires_grad = False
+
+    def forward(self, x):
+        return dwt_init(x)
+
+
 class _DoubleConv(nn.Module):
     def __init__(self, in_channels, out_channels):
         super(_DoubleConv, self).__init__()
