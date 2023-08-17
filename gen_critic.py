@@ -46,7 +46,6 @@ def dwt_init(x):
     x_HH = F.conv2d(x, f_HH, stride=2) / 2
     return x_LL, torch.cat((x_HL, x_LH, x_HH), 1)
 
-
 class DWT(nn.Module):
     def __init__(self):
         super(DWT, self).__init__()
@@ -54,7 +53,6 @@ class DWT(nn.Module):
 
     def forward(self, x):
         return dwt_init(x)
-
 
 class _DoubleConv(nn.Module):
     def __init__(self, in_channels, out_channels):
@@ -70,7 +68,6 @@ class _DoubleConv(nn.Module):
 
     def forward(self, x):
         return self.conv(x)
-
 
 class UNet(nn.Module):
     def __init__(self, in_channels=3, out_channels=64, features=[64, 128, 256, 512]):
